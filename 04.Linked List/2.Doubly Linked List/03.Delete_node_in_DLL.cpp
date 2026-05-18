@@ -28,27 +28,37 @@ APPROACH:-
 
 CODE:-
 */
-Node* deleteNode(Node *head_ref, int x) {
-  Node* temp = head_ref;
-  
-  // If the node to be deleted is the head node
-  if (x == 1) {
-    temp = temp->next;
-    return temp;
-  }
-  
-  // Traverse to the node just before the position to be deleted
-  for (int i = 1; i < (x - 1); i++) {
-    temp = temp->next;
-  }
-  
-  // Store the previous and next nodes of the node to be deleted
-  Node* previous = temp;
-  previous->next = temp->next->next;
-  temp->prev = previous;
-  
-  return head_ref;
-}
+/**
+class ListNode
+{
+ * Definition for doubly-linked list.
+ *  public:
+ *      int data;
+ *      ListNode *prev;
+ *      ListNode *next;
+ *      ListNode() : data(0), prev(nullptr), next(nullptr) {}
+ *      ListNode(int x) : data(x), prev(nullptr), next(nullptr) {}
+ *      ListNode(int x, ListNode *prev, ListNode *next) : data(x), prev(prev), next(next) {}
+};
+*/
+
+class Solution {
+public:
+    ListNode *deleteHead(ListNode *&head) {
+        // Your code goes here
+        if(head==NULL) return NULL;
+        if(head->next==NULL){
+            delete head;
+            return NULL;
+        }
+        ListNode* curr=head->next;
+        curr->prev=NULL;
+        delete head;
+        head=curr;
+        return head;
+    }
+};
+
 
 /*
 Time Complexity:
