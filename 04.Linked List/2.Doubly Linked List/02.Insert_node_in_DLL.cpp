@@ -39,16 +39,29 @@ Space complexity is O(1) as we are using a constant amount of extra space to sto
 CODE:-
 */
 
-void addNode(Node *head, int pos, int data)
+/**
+class ListNode
 {
-   int cnt = 0;
-   Node* curr = head;
-   while(cnt<pos){
-       curr = curr->next;
-       cnt++;
-   }
-   Node* nxt = curr->next;
-   curr->next = new Node(data);
-   curr->next->prev = curr;
-   curr->next->next = nxt;
-}
+ * Definition for doubly-linked list.
+ *  public:
+ *      int data;
+ *      ListNode *prev;
+ *      ListNode *next;
+ *      ListNode() : data(0), prev(nullptr), next(nullptr) {}
+ *      ListNode(int x) : data(x), prev(nullptr), next(nullptr) {}
+ *      ListNode(int x, ListNode *prev, ListNode *next) : data(x), prev(prev), next(next) {}
+};
+*/
+
+class Solution {
+public:
+    ListNode* insertBeforeHead(ListNode* head, int X) {
+        // Your code goes here
+        if(head==NULL) return new ListNode(X);
+        ListNode* curr=head;
+        head=new ListNode(X);
+        head->next=curr;
+        curr->prev=head;
+        return head;
+    }
+};
