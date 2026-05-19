@@ -23,20 +23,20 @@ TIME COMPLEXITY: O(N)
 SPACE COMPLEXITY: O(1)
 */
 
-ListNode* deleteMiddle(ListNode* head) {
-    ListNode* slow = head;
-    ListNode* fast = head;
-    ListNode* prev = NULL;
-    
-    // Move the slow and fast pointers
-    while (fast && fast->next) {
-        prev = slow;
-        slow = slow->next;
-        fast = fast->next->next;
+class Solution {
+public:
+    ListNode* deleteMiddle(ListNode* head) {
+        if (!head || !head->next)
+            return NULL;
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* prev = NULL;
+        while (fast && fast->next) {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        prev->next = slow->next;
+        return head;
     }
-    
-    // Update the next pointer of the previous node
-    prev->next = slow->next;
-    
-    return head;
-}
+};
