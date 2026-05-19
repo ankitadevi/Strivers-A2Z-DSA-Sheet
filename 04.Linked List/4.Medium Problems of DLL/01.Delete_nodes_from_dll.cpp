@@ -22,25 +22,42 @@ To delete all occurrences of the given key from a doubly linked list, we can tra
 
 **CODE:**/
 
-void deleteAllOccurOfX(struct Node** head_ref, int x) {
-    Node* curr = *head_ref;
-    while (curr) {
-        if (curr->data == x) {
-            // First node
-            if (!curr->prev) {
-                *head_ref = curr->next;
-                curr->next->prev = NULL
+class Solution {
+public:
+    ListNode* deleteAllOccurrences(ListNode* head, int target) {
+
+        ListNode* curr = head;
+
+        while (curr) {
+
+            if (curr->val == target) {
+
+                ListNode* nextNode = curr->next;
+
+                // deleting head
+                if (curr == head) {
+                    head = head->next;
+                }
+
+                // connect prev node
+                if (curr->prev) {
+                    curr->prev->next = curr->next;
+                }
+
+                // connect next node
+                if (curr->next) {
+                    curr->next->prev = curr->prev;
+                }
+
+                delete curr;
+
+                curr = nextNode;
             }
-            // Last node
-            else if (!curr->next) {
-                curr->prev->next = curr->next;
-            }
-            // Middle node
             else {
-                curr->next->prev = curr->prev;
-                curr->prev->next = curr->next;
+                curr = curr->next;
             }
         }
-        curr = curr->next;
+
+        return head;
     }
-}
+};
