@@ -22,23 +22,28 @@ struct node {
 };
 
 node* newNode(int data) {
-    node* newNode = new node();
-    newNode->data = data;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
+    node* temp = new node();
+    temp->data = data;
+    temp->left = NULL;
+    temp->right = NULL;
+
+    return temp;
 }
 
 node* solve(vector<int>& vec, int i) {
-    if(i >= 7) {
+
+    // Base case
+    if(i >= vec.size()) {
         return NULL;
     }
-    
+
+    // Create current node
     node* root = newNode(vec[i]);
-    i = 2 * i;
-    root->left = solve(vec, i + 1);
-    root->right = solve(vec, i + 2);
-    
+
+    // Create left and right subtree
+    root->left = solve(vec, 2*i + 1);
+    root->right = solve(vec, 2*i + 2);
+
     return root;
 }
 
