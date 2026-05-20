@@ -15,18 +15,18 @@ Complexity Analysis:
 Code:
 */
 
-pair<bool, int> solve(TreeNode* root) {
-    if (!root) {
-        return {true, 0};
+class Solution {
+public:
+    int maxHeight(TreeNode* root){
+        if(!root) return 0;
+        int lh=maxHeight(root->left);
+        int rh=maxHeight(root->right);
+        if(lh==-1 || rh==-1) return -1;
+        if(abs(lh-rh)>1) return -1;
+        return max(lh,rh)+1;
     }
-    auto left = solve(root->left);
-    auto right = solve(root->right);
-    int height = max(left.second, right.second) + 1;
-    bool balanced = left.first && right.first && abs(left.second - right.second) <= 1;
-    return {balanced, height};
-}
 
-bool isBalanced(TreeNode* root) {
-    auto result = solve(root);
-    return result.first;
-}
+    bool isBalanced(TreeNode* root) {
+        return maxHeight(root)!=-1;
+    }
+};
