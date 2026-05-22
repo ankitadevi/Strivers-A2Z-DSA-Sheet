@@ -15,37 +15,49 @@ Complexity Analysis:
 Code:
 */
 
-vector<int> getBottomView(TreeNode<int> *root) {
-    if (!root) return {};
+class Solution{
+public:
 
-    unordered_map<int, pair<int, int>> mp;
-    int mini = 0, maxi = 0;
-    queue<pair<TreeNode<int>*, pair<int, int>>> q;
-    q.push({root, {0, 0}});
+    vector<int> bottomView(TreeNode *root){
 
-    while (!q.empty()) {
-        auto p = q.front();
-        q.pop();
-        TreeNode<int>* curr = p.first;
-        int hd = p.second.first;
-        int level = p.second.second;
+        if(!root) return {};
 
-        mp[hd] = {curr->data, level};
-        mini = min(mini, hd);
-        maxi = max(maxi, hd);
+        unordered_map<int,int> mp;
 
-        if (curr->left) {
-            q.push({curr->left, {hd - 1, level + 1}});
+        queue<pair<int,TreeNode*>> q;
+
+        int mini = 0, maxi = 0;
+
+        q.push({0, root});
+
+        while(!q.empty()){
+
+            auto p = q.front();
+            q.pop();
+
+            int col = p.first;
+            TreeNode* curr = p.second;
+
+            // overwrite every time
+            mp[col] = curr->data;
+
+            if(curr->left){
+                q.push({col-1, curr->left});
+                mini = min(mini, col-1);
+            }
+
+            if(curr->right){
+                q.push({col+1, curr->right});
+                maxi = max(maxi, col+1);
+            }
         }
-        if (curr->right) {
-            q.push({curr->right, {hd + 1, level + 1}});
+
+        vector<int> ans;
+
+        for(int i = mini; i <= maxi; i++){
+            ans.push_back(mp[i]);
         }
-    }
 
-    vector<int> ans;
-    for (int i = mini; i <= maxi; i++) {
-        ans.push_back(mp[i].first);
+        return ans;
     }
-
-    return ans;
-}
+};
