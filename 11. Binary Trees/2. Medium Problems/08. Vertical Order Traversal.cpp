@@ -13,18 +13,8 @@ Approach:
 
 Complexity Analysis:
 - Time Complexity
-BFS Traversal
-
-Each node visited once:
-
-O(n)
-Sorting
-
-All nodes are sorted column-wise.
-
-Worst case:
-
-O(nlogn)
+BFS Traversal-Each node visited once: O(n)
+Sorting-All nodes are sorted column-wise.Worst case: O(nlogn)
 - The space complexity is O(N), where N is the number of nodes in the binary tree. This space is used to store the nodes in the unordered_map during the traversal.
 
 Code:
