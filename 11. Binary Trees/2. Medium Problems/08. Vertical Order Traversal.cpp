@@ -12,14 +12,26 @@ Approach:
 - Finally, we return the result vector containing the vertical order traversal.
 
 Complexity Analysis:
-- Since we visit each node once and perform constant time operations for each node, the time complexity of this approach is O(N), where N is the number of nodes in the binary tree.
+- Time Complexity
+BFS Traversal
+
+Each node visited once:
+
+O(n)
+Sorting
+
+All nodes are sorted column-wise.
+
+Worst case:
+
+O(nlogn)
 - The space complexity is O(N), where N is the number of nodes in the binary tree. This space is used to store the nodes in the unordered_map during the traversal.
 
 Code:
 */
 
 // NOTE:- we are keeping track of levels because of the question condition but if no such condition exists, then no need of level only hd will work.
-
+// lvl=row, hd=col.
 vector<vector<int>> verticalTraversal(TreeNode* root) {
     if (!root) return {};
 
