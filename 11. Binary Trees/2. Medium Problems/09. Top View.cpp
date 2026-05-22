@@ -20,7 +20,7 @@ vector<int> getTopView(TreeNode<int> *root) {
 
     unordered_map<int, int> mp;
     int mini = 0, maxi = 0;
-    queue<pair<int, TreeNode<int>*>> q;
+    queue<pair<int, TreeNode*>> q;
     q.push({0, root});
 
     while (!q.empty()) {
