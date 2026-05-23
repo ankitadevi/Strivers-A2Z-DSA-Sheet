@@ -8,34 +8,57 @@ To find the path from the root to the given node, we can use a recursive functio
 
 **Complexity Analysis:**
 
-Let N be the number of nodes in the binary tree.
+Time Complexity:
+Traversal: O(N)
+Copying paths into ans: O(N
+2
+) worst case
+Overall: O(N
+2
+) worst case
+Space Complexity:
+Recursive stack + path: O(H)
+Including output ans: O(N
+2
+) worst case
 
-- Time Complexity: The time complexity of the recursive function is O(N) as we may visit all nodes in the worst case.
-- Space Complexity: The space complexity is O(N) due to the space used by the recursion stack and the path vector.
+Where:
+
+N = number of nodes
+H = height of tree
 
 **Code:**/
 
-bool findPath(TreeNode* root, int target, vector<int>& path) {
-    if (!root) return false;
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
 
-    path.push_back(root->val);
+class Solution{
+	public:
 
-    if (root->val == target) {
-        return true;
-    }
+        void dfs(TreeNode* root,vector<vector<int>>&ans,vector<int>&path){
+            if(!root) return;
+            path.push_back(root->data);
+            if(!root->left && !root->right) ans.push_back(path);
+            else {
+                dfs(root->left,ans,path);
+                dfs(root->right,ans,path);
+            }
+            path.pop_back();
+        }
 
-    if (findPath(root->left, target, path) || findPath(root->right, target, path)) {
-        return true;
-    }
-
-    path.pop_back();
-    return false;
-}
-
-vector<int> getPathFromRootToNode(TreeNode* root, int target) {
-    vector<int> path;
-    findPath(root, target, path);
-    return path;
-}
-
+		vector<vector<int>> allRootToLeaf(TreeNode* root) {
+            //your code goes here
+            vector<vector<int>>ans;
+            vector<int>path;
+            dfs(root,ans,path);
+            return ans;
+		}
+};
 
