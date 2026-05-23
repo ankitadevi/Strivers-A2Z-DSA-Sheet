@@ -9,23 +9,46 @@ To find the path from the root to the given node, we can use a recursive functio
 **Complexity Analysis:**
 
 Time Complexity:
-Traversal: O(N)
-Copying paths into ans: O(N
-2
-) worst case
-Overall: O(N
-2
-) worst case
-Space Complexity:
-Recursive stack + path: O(H)
-Including output ans: O(N
-2
-) worst case
+If there are L leaf nodes and average path length is H, copying cost becomes:
 
-Where:
+O(L×H)
 
-N = number of nodes
-H = height of tree
+So overall:
+
+Worst case Time Complexity:
+
+O(N)^2
+
+(for skewed tree where height = N)
+
+Balanced tree:
+
+O(NlogN)
+Space Complexity
+Recursive stack + path vector
+
+At maximum, recursion depth and path size are equal to tree height:
+
+O(H)
+Output storage
+
+ans stores all root-to-leaf paths.
+
+In worst case, total stored elements can be:
+
+O(N)^2
+
+(for skewed tree / many long paths)
+
+So:
+
+Auxiliary Space (excluding output):
+
+O(H)
+
+Total Space (including answer):
+
+O(N)^2
 
 **Code:**/
 
