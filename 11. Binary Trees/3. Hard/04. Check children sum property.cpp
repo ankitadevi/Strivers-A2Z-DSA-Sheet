@@ -34,17 +34,15 @@ Let `n` be the number of nodes in the binary tree.
 CODE:
 */
 
-int solve(Node* root) {
-    if (!root) return 0;
-    if (!root->left && !root->right) return root->data;
-    
-    int lef = solve(root->left);
-    int rig = solve(root->right);
-    
-    return (lef + rig == root->data) ? 2 * root->data : INT_MIN;
-}
-
-bool isSumTree(Node* root) {
-    int ans = solve(root);
-    return (ans == INT_MIN) ? false : true;
-}
+class Solution {
+public:
+    bool checkChildrenSum(TreeNode* root) {
+        if(root == NULL) return true;
+        if(!root->left && !root->right) return true;
+        int l=0,r=0;
+        if(root->left) l=root->left->val;
+        if(root->right) r=root->right->val;
+        if(root->val==l+r) return checkChildrenSum(root->left) && checkChildrenSum(root->right);
+        return false;
+    }
+};
