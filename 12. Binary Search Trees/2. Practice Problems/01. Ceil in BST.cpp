@@ -32,6 +32,13 @@ The time complexity of this approach is O(h), where `h` is the height of the BST
 In the average case, the height is usually log(N) for a balanced BST.
 
 The space complexity is O(1) since we are using a constant amount of extra space (variables) to store the intermediate results.
+Space Complexity
+
+Recursive stack stores function calls up to tree height.
+
+SC = O(h)
+Balanced BST → O(log n)
+Skewed BST → O(n)
 
 **CODE:**/
 
