@@ -55,3 +55,56 @@ int findCeil(Node* root, int input) {
     solve(root, input, ans);
     return ans;
 }
+
+
+//Floor-ceil together
+/**
+ * Definition for a binary tree node.
+ * class TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *      TreeNode(int val) : data(val) , left(nullptr) , right(nullptr) {}
+ * };
+ **/
+
+class Solution{	
+	public:
+
+        void floor_val(TreeNode* root,int key,int &floor){
+            if(!root) return;
+            if(root->data==key){
+                floor=root->data;
+                return;
+            }
+            if(root->data<key){
+                floor=root->data;
+                floor_val(root->right,key,floor);
+            }
+            else floor_val(root->left,key,floor);
+        }
+
+            
+
+            void ceil_val(TreeNode* root,int key,int &ceil){
+            if(!root) return;
+            if(root->data==key){
+                ceil=root->data;
+                return;
+            }
+            if(root->data>key){
+                ceil=root->data;
+                ceil_val(root->left,key,ceil);
+            }
+            else ceil_val(root->right,key,ceil);
+        }
+
+		vector<int> floorCeilOfBST(TreeNode* root,int key){
+		//your code goes here
+            int ceil=-1,floor=-1;
+            if(!root) return {-1,-1};
+            floor_val(root,key,floor);
+            ceil_val(root,key,ceil);
+            return {floor,ceil};
+		}
+};
