@@ -1,1 +1,74 @@
+Given the root node of a binary search tree (BST) and an integer key. Return the Inorder predecessor and successor of the given key from the provided BST.
 
+
+
+Note: key will always present in given BST.
+
+
+
+If predecessor or successor is missing then return -1.
+
+
+Example 1
+
+Input : root = [5, 2, 10, 1, 4, 7, 12] , key = 10
+
+Output : [7, 12]
+
+
+//code
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int data;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int val) : data(val), left(NULL), right(NULL) {}
+ * };
+ */
+
+class Solution {
+public:
+    vector<int> succPredBST(TreeNode* root, int key) {
+        
+        int pred = -1;
+        int succ = -1;
+
+        TreeNode* curr = root;
+
+        // Find predecessor
+        while(curr) {
+            if(curr->data < key) {
+                pred = curr->data;
+                curr = curr->right;
+            }
+            else {
+                curr = curr->left;
+            }
+        }
+
+        curr = root;
+
+        // Find successor
+        while(curr) {
+            if(curr->data > key) {
+                succ = curr->data;
+                curr = curr->left;
+            }
+            else {
+                curr = curr->right;
+            }
+        }
+
+        return {pred, succ};
+    }
+};
+
+Time Complexity
+Balanced BST:
+O(logN)
+Worst case (skewed tree):
+O(N)
+Space Complexity
+O(1)
