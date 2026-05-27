@@ -23,45 +23,29 @@ class Solution {
 public:
 
     vector<int> bfsOfGraph(int V, vector<vector<int>>& edges) {
-
         // adjacency list
         vector<vector<int>> adj(V);
-
         // build graph
         for(auto e : edges) {
-
             int u = e[0];
             int v = e[1];
-
             adj[u].push_back(v);
             adj[v].push_back(u);
         }
 
         // BFS
         vector<int> ans;
-
         vector<bool> vis(V, false);
-
         queue<int> q;
-
         q.push(0);
-
         vis[0] = true;
-
         while(!q.empty()) {
-
             int node = q.front();
-
             q.pop();
-
             ans.push_back(node);
-
             for(auto neighbor : adj[node]) {
-
                 if(!vis[neighbor]) {
-
-                    vis[neighbor] = true;
-
+                 vis[neighbor] = true;
                     q.push(neighbor);
                 }
             }
