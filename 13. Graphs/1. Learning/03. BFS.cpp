@@ -16,6 +16,7 @@ Time Complexity:
 
 Space Complexity:
 - The space complexity is O(V), where V is the number of vertices, as we use extra space for the 'vis' vector and the 'q' queue.
+adjacency list O(V+E)
 
 */
 
