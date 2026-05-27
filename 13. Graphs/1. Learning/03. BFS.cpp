@@ -25,7 +25,7 @@ public:
     vector<int> bfsOfGraph(int V, vector<vector<int>>& edges) {
 
         // adjacency list
-        vector<int> adj[V];
+        vector<vector<int>> adj(V);
 
         // build graph
         for(auto e : edges) {
