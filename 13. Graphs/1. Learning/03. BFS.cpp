@@ -19,25 +19,54 @@ Space Complexity:
 
 */
 
-vector<int> bfsOfGraph(int V, vector<int> adj[]) {
-    vector<int> ans;
-    vector<bool> vis(V, false);
+class Solution {
+public:
 
-    queue<int> q;
-    q.push(0);
-    vis[0] = true;
+    vector<int> bfsOfGraph(int V, vector<vector<int>>& edges) {
 
-    while (!q.empty()) {
-        int node = q.front();
-        q.pop();
-        ans.push_back(node);
-        for (auto i : adj[node]) {
-            if (!vis[i]) {
-                q.push(i);
-                vis[i] = true;
+        // adjacency list
+        vector<int> adj[V];
+
+        // build graph
+        for(auto e : edges) {
+
+            int u = e[0];
+            int v = e[1];
+
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+
+        // BFS
+        vector<int> ans;
+
+        vector<bool> vis(V, false);
+
+        queue<int> q;
+
+        q.push(0);
+
+        vis[0] = true;
+
+        while(!q.empty()) {
+
+            int node = q.front();
+
+            q.pop();
+
+            ans.push_back(node);
+
+            for(auto neighbor : adj[node]) {
+
+                if(!vis[neighbor]) {
+
+                    vis[neighbor] = true;
+
+                    q.push(neighbor);
+                }
             }
         }
-    }
 
-    return ans;
-}
+        return ans;
+    }
+};
