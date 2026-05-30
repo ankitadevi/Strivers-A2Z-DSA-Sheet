@@ -70,7 +70,7 @@ int orangesRotting(vector<vector<int>>& grid) {
                 }
             }
         }
-        ans++;
+        if(!q.empty()) ans++;
     }
 
     return (fresh > 0) ? -1 : ans;
